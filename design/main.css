@@ -1,0 +1,481 @@
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed, 
+figure, figcaption, footer, header, hgroup, 
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font-size: 100%;
+	font: inherit;
+	vertical-align: baseline;
+}
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure, 
+footer, header, hgroup, menu, nav, section {
+	display: block;
+}
+body {
+	line-height: 1;
+}
+
+ol, ul {
+	list-style: none;
+}
+blockquote, q {
+	quotes: none;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+	content: '';
+	content: none;
+}
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+
+body {
+	-webkit-font-smoothing: antialiased;
+    font-smoothing: antialiased;
+	background: #000;
+	color: #000;
+	font-family: 'Helvetica', 'Helvetica', helvetica, arial;
+	-webkit-transition: background-color 0.5s ease-in-out;
+	-moz-transition: background-color 0.5s ease-in-out;
+	-o-transition: background-color 0.5s ease-in-out;
+	transition: background-color 0.5s ease-in-out;
+}
+
+span {display:block;}
+
+h1, h2 {
+	font-size: 18px;
+	line-height: 24px;
+	letter-spacing: 2px;
+	color: black;
+	font-family:'Helvetica';
+	}
+
+h2 {margin-bottom: 40px;}
+
+ul,li {
+	margin: 0; 
+	padding: 0;
+	}
+	
+ul span {
+	display: inline-block;
+}
+
+ul li {
+	line-height: 24px;
+	letter-spacing: 1px;
+}
+
+ul a {
+	text-decoration: none; 
+	font-size: 10px; 
+	color: black; 
+	text-transform: uppercase;
+	}
+
+a:hover {color: #16b8d9;}
+
+a {color: #16b8d9;
+
+text-decoration: none;
+
+}
+
+
+
+
+/*______COLORS_______*/
+.color-intro {background-color: #fff;}
+.color-artsy {background-color: #6b00d0;}
+.color-oyyo {background-color: #ffbf98;}
+.color-soundrop {background-color: #00bf60;}
+.color-svtplay {background-color: #131313;}
+.color-svt-nyheter {background-color: #d90000;}
+.color-spotify {background-color: #65a100;}
+.color-shaot {background-color: #ffbf00;}
+.color-spotify-mobile {background-color: #65a100;}
+.color-svt-humor {background-color: #e64662;}
+.color-svt {background-color: #333333;}
+.color-telia {background-color: #ef6ea3;}
+.color-spotify-radio {background-color: #649a00;}
+.color-doberman {background-color: #666666;}
+.color-dottirsonur {background-color: #4c1774;}
+.color-itshowtime {background-color: #46adb2;}
+.color-artiitii {background-color: #f2b600;}
+.color-footer {background-color: #999;}
+
+nav {
+	font-family:'Helvetica';
+	position: fixed;
+	bottom: 10px; left: 20px;
+	font-size: 10px;
+	text-transform: uppercase;
+}
+
+nav a {
+	display:block;
+	height: 9px; width: 150px;
+	line-height: 9px;
+}
+
+nav i {
+	text-indent: -9999px;
+	overflow: hidden;
+	-webkit-border-radius: 15px;
+	-moz-border-radius: 15px;
+	border-radius: 15px;
+	background: #878787;
+	background: rgba(0,0,0, .2);
+	display: inline-block;
+	_display: block;
+	width: 6px;
+	height: 6px;
+	margin-right: 6px;
+}
+
+nav a:hover i{
+	background: rgba(0,0,0, 0.5);
+}
+
+nav .active a i{
+	background: rgba(255,255,255, 1);
+}
+
+nav li {
+	height: 9px;
+	line-height: 9px;
+	margin-bottom: 9px;
+}
+
+nav ul li span {display: none;}
+nav ul li:hover span {display: inline-block;}
+
+.section {
+	width: 100%;
+	text-align: center;
+	min-height: 500px;
+}
+
+.section-wrap {
+	max-width: 940px;
+	margin: 0 auto;
+	padding: 180px 20px 180px 20px;
+}
+
+.section-wrap img {
+	max-width: 100%;
+}
+
+.brand {
+	
+	margin-bottom: 50px;
+
+}
+
+#brand_id {
+	position: fixed;
+	top: 20px; left: 20px;
+
+}
+
+.intro-header {
+	font-size: 24px;
+	line-height: 34px;
+
+}
+
+.intro-tagline {
+	font-size: 10px;
+	text-transform: uppercase;
+	margin-bottom: 40px;
+	letter-spacing: 1px;
+}
+
+.intro-description,
+.description {
+	font-size: 24px;
+	line-height: 34px;
+	font-family:'Helvetica';
+	margin: 0 auto 40px auto;
+	max-width: 790px;
+}
+
+.intro-description {
+	text-transform: none;
+}
+
+.description a {
+	text-decoration: none;
+	color: black;
+}
+
+.launch a {
+	color: black;
+	text-decoration: none;
+}
+
+.launch span {
+	display: inline-block;
+}
+
+.period, .role, .launch, .client, .agency {
+	font-size: 10px;
+	text-transform: uppercase;
+	font-family:'Helvetica';
+	line-height: 24px;
+	letter-spacing: 1px;
+}
+
+.screens {
+	margin-top: 80px;
+}
+
+.screens img {
+	margin-bottom: 40px;
+}
+
+.video-container {
+	position: relative;
+	padding-bottom: 56.25%;
+	padding-top: 30px;
+	height: 0;
+	overflow: hidden;
+	margin-bottom: 40px;
+}
+
+.video-container iframe,  
+.video-container object,  
+.video-container embed {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+}
+
+.screen-text {
+	margin: -23px auto 40px auto;
+	text-align: center;
+	font-size: 14px;
+}
+
+.screen-text strong{
+	text-transform: uppercase;
+	font-size: 10px;
+	letter-spacing: 1px;
+	font-family:'Helvetica';
+}
+
+#intro,#footer {
+	padding: 140px 0 100px 0;
+	font-family:'Helvetica';
+	text-transform: uppercase;
+}
+
+/* Smartphones (portrait) ----------- */
+@media screen and (max-width: 320px) {
+.description {
+	font-family:'Helvetica';
+	font-size: 14px;
+	margin: 0 auto 20px auto;
+	line-height: 21px;
+}
+
+nav {
+	font-family:'Helvetica';
+	position: fixed;
+	bottom: 10px; left: -120px;
+	font-size: 10px;
+	text-transform: uppercase;
+}
+
+#brand_id {
+
+	position: fixed;
+	top: 10px; left: -120px;
+
+}
+
+ul a {
+	text-decoration: none; 
+	font-size: 8px; 
+	line-height: 18px;
+	color: black; 
+	text-transform: uppercase;
+}
+
+.brand {
+	margin-bottom: 20px;
+}
+
+.section-wrap {
+	max-width: 940px;
+	margin: 0 auto;
+	padding: 20px 20px 60px 20px;
+}
+
+h2 {
+	margin-bottom: 20px;
+}
+
+.screens {
+	margin-top: 30px;
+}
+
+.intro-tagline {
+	font-size: 8px;
+	text-transform: uppercase;
+	letter-spacing: 1px;
+}
+
+#intro,#footer {
+	font-size: 8px;
+	padding: 80px 0 0px 0;
+	text-transform: uppercase;
+	font-family:'Helvetica';
+}
+
+.intro-header {
+	font-size: 12px;
+	line-height: 21px;
+
+}
+
+.intro-description,
+.description {
+	max-width: 790px;
+	font-family:'Helvetica';
+	font-size: 14px;
+	margin: 0 auto 20px auto;
+	line-height: 21px;
+
+}
+
+a .description {
+
+
+
+}
+
+.screen-text {
+	margin: -35px auto 20px auto;
+	text-align: center;
+	font-size: 10px;
+	font-family:'Helvetica';
+	line-height: 12px;
+	
+}
+
+.screen-text strong{
+	text-transform: uppercase;
+	font-size: 8px;
+	font-family:'Helvetica';
+	letter-spacing: 1px;
+}
+
+.period, .role, .launch, .client, .agency {
+	font-size: 8px;
+	font-family:'Helvetica';
+	text-transform: uppercase;
+	line-height: 18px;
+	letter-spacing: 1px;
+}
+
+
+body {
+	-webkit-transition: none;
+	-moz-transition: none;
+	-o-transition: none;
+	transition:none;
+}
+
+@media screen and (min-width: 321px) and (orientation:landscape) {
+.description {
+	font-family:'Helvetica';
+	font-size: 12px;
+	margin: 0 auto 20px auto;
+	line-height: 21px;
+}
+
+ul a {
+	text-decoration: none; 
+	font-size: 8px; 
+	line-height: 18px;
+	color: black; 
+	text-transform: uppercase;
+}
+
+.brand {
+	margin-bottom: 20px;
+}
+
+.section-wrap {
+	max-width: 940px;
+	margin: 0 auto;
+	padding: 20px 20px 60px 20px;
+}
+
+h2 {
+	margin-bottom: 20px;
+}
+
+.screens {
+	margin-top: 30px;
+}
+
+#intro,#footer {
+	font-size: 8px;
+	padding: 80px 0 0px 0;
+	text-transform: uppercase;
+	font-family:'Helvetica';
+}
+
+.screen-text {
+	margin: -35px auto 20px auto;
+	text-align: center;
+	font-size: 10px;
+	font-family:'Helvetica';
+	line-height: 12px;
+
+}
+
+.screen-text strong{
+	text-transform: uppercase;
+	font-size: 8px;
+	font-family:'Helvetica';
+	letter-spacing: 1px;
+}
+
+.period, .role, .launch, .client, .agency {
+	font-size: 8px;
+	font-family:'Helvetica';
+	text-transform: uppercase;
+	line-height: 18px;
+	letter-spacing: 1px;
+}
+
+
+body {
+	-webkit-transition: none;
+	-moz-transition: none;
+	-o-transition: none;
+	transition:none;
+}
+
+
+}

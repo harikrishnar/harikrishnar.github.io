@@ -1,0 +1,9 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(/Users/hari/.claude_team/plugins/cache/claude-plugins-official/superpowers/5.0.0/lib/brainstorm-server/start-server.sh --project-dir /Users/hari/work/logward/harikrishnar.github.io)",
+      "Read(//Users/hari/.claude_team/plugins/cache/claude-plugins-official/superpowers/5.0.0/lib/brainstorm-server/**)",
+      "Bash(npm install:*)"
+    ]
+  }
+}

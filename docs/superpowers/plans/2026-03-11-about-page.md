@@ -1,0 +1,450 @@
+# About Page Implementation Plan
+
+> **For agentic workers:** REQUIRED: Use superpowers:subagent-driven-development (if subagents available) or superpowers:executing-plans to implement this plan. Steps use checkbox (`- [ ]`) syntax for tracking.
+
+**Goal:** Create `about.html` and add an "About" link to `index.html`, giving visitors a richer view of Hari's work and personality.
+
+**Architecture:** Single new self-contained `about.html` mirroring the CSS token structure and component patterns of `index.html`. No shared CSS files — tokens are duplicated intentionally to keep each page independently deployable. One minor edit to `index.html` to add the third nav link.
+
+**Tech Stack:** HTML5, CSS3 (custom properties, keyframe animations), vanilla JS (dark mode toggle)
+
+---
+
+## Chunk 1: Create about.html and update index.html
+
+### Task 1: Create about.html
+
+**Files:**
+- Create: `about.html`
+
+- [ ] **Step 1: Read index.html to understand existing patterns**
+
+Read `/Users/hari/work/logward/harikrishnar.github.io/index.html` — note the CSS token names, animation keyframes, dark mode toggle markup, and `.bg-monogram` pattern. The about page mirrors all of these exactly.
+
+- [ ] **Step 2: Write about.html**
+
+Create `/Users/hari/work/logward/harikrishnar.github.io/about.html` with the following complete content:
+
+```html
+<!doctype html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>About — Hari Krishna</title>
+  <meta name="description" content="Things I've built, what I'm working on, and a bit about who I am.">
+  <meta property="og:title" content="About — Hari Krishna">
+  <meta property="og:description" content="Things I've built, what I'm working on, and a bit about who I am.">
+  <meta property="og:url" content="https://hari-krishna.com/about">
+  <meta name="robots" content="index,follow">
+  <link rel="icon" type="image/png" href="favicon.png">
+  <style>
+    /* ── Tokens ── */
+    :root {
+      --bg:             #ffffff;
+      --text:           #111111;
+      --text-secondary: #555555;
+      --text-muted:     #888888;
+      --text-faint:     #bbbbbb;
+      --monogram:       #f0f0f0;
+      --accent:         #e67e00;
+      --border:         #f0f0f0;
+      --toggle-bg:      #f0f0f0;
+      --toggle-icon:    #888888;
+    }
+    [data-theme="dark"] {
+      --bg:             #0f0f0f;
+      --text:           #f0f0f0;
+      --text-secondary: #aaaaaa;
+      --text-muted:     #666666;
+      --text-faint:     #2a2a2a;
+      --monogram:       #1a1a1a;
+      --accent:         #e67e00;
+      --border:         #1e1e1e;
+      --toggle-bg:      #1e1e1e;
+      --toggle-icon:    #666666;
+    }
+
+    /* ── Reset ── */
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    /* ── Base ── */
+    html { font-size: 16px; }
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      min-height: 100vh;
+      overflow-x: hidden;
+      transition: background 0.4s ease, color 0.4s ease;
+    }
+
+    /* ── Dark mode toggle ── */
+    .toggle {
+      position: fixed;
+      top: 24px;
+      right: 24px;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: var(--toggle-bg);
+      border: none;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background 0.3s ease;
+      z-index: 10;
+      opacity: 0;
+      animation: fadeUp 0.5s ease 0.2s forwards;
+    }
+    .toggle:hover { background: var(--accent); }
+    .toggle:hover svg { stroke: #fff; }
+    .toggle svg {
+      width: 18px;
+      height: 18px;
+      stroke: var(--toggle-icon);
+      fill: none;
+      stroke-width: 2;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      transition: stroke 0.3s ease;
+    }
+    .icon-sun  { display: none; }
+    .icon-moon { display: block; }
+    [data-theme="dark"] .icon-sun  { display: block; }
+    [data-theme="dark"] .icon-moon { display: none; }
+
+    /* ── Ghost monogram ── */
+    .bg-monogram {
+      position: fixed;
+      bottom: -60px;
+      right: -20px;
+      font-size: clamp(200px, 30vw, 340px);
+      font-weight: 900;
+      color: var(--monogram);
+      letter-spacing: -14px;
+      line-height: 1;
+      user-select: none;
+      pointer-events: none;
+      transition: color 0.4s ease;
+      opacity: 0;
+      animation: fadeIn 1s ease 0.1s forwards;
+    }
+
+    /* ── Page ── */
+    .page {
+      width: 100%;
+      max-width: 760px;
+      margin: 0 auto;
+      padding: 60px 64px 80px;
+      position: relative;
+    }
+
+    /* ── Back link ── */
+    .back {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: var(--text-faint);
+      text-decoration: none;
+      margin-bottom: 52px;
+      transition: color 0.2s ease;
+      opacity: 0;
+      animation: fadeUp 0.5s ease 0.3s forwards;
+    }
+    .back:hover { color: var(--accent); }
+
+    /* ── Section ── */
+    .section {
+      opacity: 0;
+    }
+    .section-label {
+      font-size: 10px;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--accent);
+      font-weight: 700;
+      margin-bottom: 20px;
+    }
+
+    /* ── Projects ── */
+    .project {
+      margin-bottom: 20px;
+    }
+    .project:last-child { margin-bottom: 0; }
+    .project-name {
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 4px;
+      transition: color 0.4s ease;
+    }
+    .project-desc {
+      font-size: 14px;
+      line-height: 1.65;
+      color: var(--text-muted);
+      max-width: 480px;
+      transition: color 0.4s ease;
+    }
+    .project-award {
+      color: var(--accent);
+      font-weight: 600;
+      font-size: 12px;
+    }
+
+    /* ── Rule ── */
+    .rule {
+      width: 100%;
+      height: 1px;
+      background: var(--border);
+      margin: 44px 0;
+      opacity: 0;
+      transition: background 0.4s ease;
+    }
+
+    /* ── Currently ── */
+    .currently-main {
+      font-size: 15px;
+      line-height: 1.7;
+      color: var(--text-secondary);
+      max-width: 480px;
+      margin-bottom: 8px;
+      transition: color 0.4s ease;
+    }
+    .currently-main strong { color: var(--text); font-weight: 600; }
+    .currently-sub {
+      font-size: 14px;
+      line-height: 1.65;
+      color: var(--text-faint);
+      max-width: 480px;
+      transition: color 0.4s ease;
+    }
+
+    /* ── Beyond work ── */
+    .beyond p {
+      font-size: 15px;
+      line-height: 1.75;
+      color: var(--text-secondary);
+      max-width: 480px;
+      margin-bottom: 14px;
+      transition: color 0.4s ease;
+    }
+    .beyond p:last-child { margin-bottom: 0; }
+
+    /* ── Animations ── */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(16px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to   { opacity: 1; }
+    }
+
+    .anim-1 { animation: fadeUp 0.5s ease 0.4s forwards; }
+    .anim-2 { animation: fadeUp 0.5s ease 0.5s forwards; }
+    .anim-3 { animation: fadeUp 0.5s ease 0.6s forwards; }
+    .anim-4 { animation: fadeUp 0.5s ease 0.65s forwards; }
+    .anim-5 { animation: fadeUp 0.5s ease 0.7s forwards; }
+    .anim-6 { animation: fadeUp 0.5s ease 0.75s forwards; }
+    .anim-7 { animation: fadeUp 0.5s ease 0.8s forwards; }
+
+    /* ── Mobile ── */
+    @media (max-width: 600px) {
+      body { overflow-y: auto; }
+      .page { padding: 48px 24px 64px; }
+      .bg-monogram { font-size: 160px; bottom: -20px; right: -10px; }
+      .project-desc, .currently-main, .currently-sub, .beyond p { max-width: 100%; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Dark mode toggle -->
+  <button class="toggle" onclick="toggleTheme()" aria-label="Toggle dark mode">
+    <svg class="icon-moon" viewBox="0 0 24 24">
+      <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+    </svg>
+    <svg class="icon-sun" viewBox="0 0 24 24">
+      <circle cx="12" cy="12" r="5"/>
+      <line x1="12" y1="1" x2="12" y2="3"/>
+      <line x1="12" y1="21" x2="12" y2="23"/>
+      <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/>
+      <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/>
+      <line x1="1" y1="12" x2="3" y2="12"/>
+      <line x1="21" y1="12" x2="23" y2="12"/>
+      <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/>
+      <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
+    </svg>
+  </button>
+
+  <!-- Background monogram -->
+  <div class="bg-monogram" aria-hidden="true">HK</div>
+
+  <main class="page">
+
+    <!-- Back link -->
+    <a class="back" href="/">&#x2190; hari-krishna.com</a>
+
+    <!-- Section 1: Things I've built -->
+    <section class="section anim-1" aria-labelledby="built-label">
+      <div class="section-label" id="built-label">Things I&#x2019;ve built</div>
+
+      <div class="project">
+        <div class="project-name">Logward</div>
+        <p class="project-desc">No-code logistics SaaS &#x2014; built from zero, now used by shippers and freight forwarders across Europe. <span class="project-award">CTPO, 2018&#x2013;present</span></p>
+      </div>
+
+      <div class="project">
+        <div class="project-name">Teen Patti Gold</div>
+        <p class="project-desc">India&#x2019;s most-played card game on mobile &#x2014; <span class="project-award">#1 top grossing for over 2 years.</span> Scaled the engine and infrastructure at Moonfrog Labs alongside Ludo Club, Baahubali: The Game, and more.</p>
+      </div>
+
+      <div class="project">
+        <div class="project-name">Marvel: Avengers Alliance</div>
+        <p class="project-desc">Built the combat engine for the mobile port at Disney Interactive &#x2014; shipped on iOS and Android. One of Marvel&#x2019;s biggest social titles at the time. <span class="project-award">Best Social Game &#x2014; Video Game Awards 2012</span></p>
+      </div>
+
+      <div class="project">
+        <div class="project-name">Adobe Captivate</div>
+        <p class="project-desc">Worked on the world&#x2019;s leading eLearning tool at Adobe &#x2014; built widgets and features across the product.</p>
+      </div>
+    </section>
+
+    <div class="rule anim-2" role="presentation"></div>
+
+    <!-- Section 2: Currently -->
+    <section class="section anim-3" aria-labelledby="currently-label">
+      <div class="section-label" id="currently-label">Currently</div>
+      <p class="currently-main">Running engineering and product at <strong>Logward</strong> &#x2014; disrupting how freight forwarders and shippers manage their supply chains.</p>
+      <p class="currently-sub">Always open to conversations about logistics tech, product strategy, and what comes next.</p>
+    </section>
+
+    <div class="rule anim-4" role="presentation"></div>
+
+    <!-- Section 3: Beyond work -->
+    <section class="section beyond anim-5" aria-labelledby="beyond-label">
+      <div class="section-label" id="beyond-label">Beyond work</div>
+      <p>Curious about almost everything.</p>
+      <p>I&#x2019;m drawn to understanding how things work: from the cosmos to the quiet patterns of everyday life. I tend to wander deep into physics, astronomy, spirituality, and the kinds of questions that don&#x2019;t have simple answers.</p>
+      <p>I enjoy conversations that drift into unexpected territory, where ideas collide and the thinking matters as much as the conclusion.</p>
+      <p>The rest of the time I&#x2019;m usually somewhere with a camera in my hand, noticing the details most people walk past.</p>
+    </section>
+
+  </main>
+
+  <script>
+    function toggleTheme() {
+      var html = document.documentElement;
+      html.setAttribute('data-theme',
+        html.getAttribute('data-theme') === 'dark' ? 'light' : 'dark'
+      );
+    }
+  </script>
+
+</body>
+</html>
+```
+
+- [ ] **Step 3: Read the file back and verify key sections**
+
+Read `about.html` and confirm:
+- `:root` and `[data-theme="dark"]` token blocks present
+- `.toggle` button with moon/sun SVGs
+- `.bg-monogram` div
+- `.back` link pointing to `"/"`
+- All 4 projects present with correct names and copy
+- "Currently" section with Logward copy
+- "Beyond work" section with all 4 paragraphs
+- `toggleTheme()` script
+
+- [ ] **Step 4: Open in browser and verify visually**
+
+```bash
+open /Users/hari/work/logward/harikrishnar.github.io/about.html
+```
+
+Check:
+- Page loads, white background, sections visible
+- Back link "← hari-krishna.com" at top-left
+- Ghost "HK" monogram visible bottom-right
+- Dark mode toggle in top-right — click to verify dark mode works
+- Entrance animations play on load
+
+- [ ] **Step 5: Verify mobile layout**
+
+Open DevTools → set viewport to 390px wide (iPhone 14).
+Expected: content reflows cleanly, no horizontal overflow, padding reduces to 24px.
+
+- [ ] **Step 6: Commit**
+
+```bash
+cd /Users/hari/work/logward/harikrishnar.github.io
+git add about.html
+git commit -m "feat: add about page with projects, currently, and beyond work sections"
+```
+
+---
+
+### Task 2: Add "About" link to index.html
+
+**Files:**
+- Modify: `index.html` (lines 304–314, the `.links` nav)
+
+- [ ] **Step 1: Read the current links nav in index.html**
+
+Read `/Users/hari/work/logward/harikrishnar.github.io/index.html` lines 304–314 to confirm the current structure before editing.
+
+- [ ] **Step 2: Add the "About" link**
+
+In the `.links` nav (after the Email link), add a separator and the About link:
+
+Find this block:
+```html
+      <a class="link" href="mailto:harikrsna.r@gmail.com">
+        <span class="link-icon" aria-hidden="true"></span>
+        Email
+      </a>
+    </nav>
+```
+
+Replace with:
+```html
+      <a class="link" href="mailto:harikrsna.r@gmail.com">
+        <span class="link-icon" aria-hidden="true"></span>
+        Email
+      </a>
+      <div class="sep" aria-hidden="true"></div>
+      <a class="link" href="/about">
+        <span class="link-icon" aria-hidden="true"></span>
+        About
+      </a>
+    </nav>
+```
+
+- [ ] **Step 3: Verify the edit**
+
+Read `index.html` lines 304–320 and confirm three links are present: LinkedIn, Email, About.
+
+- [ ] **Step 4: Open in browser and verify**
+
+```bash
+open /Users/hari/work/logward/harikrishnar.github.io/index.html
+```
+
+Confirm:
+- Three links visible: LinkedIn · Email · About
+- All three have the amber underline style
+- Clicking "About" navigates to about.html (when opened from the same directory, the `/about` href will resolve locally — confirm no 404 on GitHub Pages after push)
+
+- [ ] **Step 5: Commit**
+
+```bash
+git add index.html
+git commit -m "feat: add About link to landing page nav"
+```

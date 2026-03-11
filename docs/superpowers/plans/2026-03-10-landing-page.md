@@ -321,7 +321,7 @@ Replace the entire file with the following. This is the complete final implement
     <p class="bio">
       <strong>Technology and Product leader</strong> with a customer-first mindset.
       Versatile across <strong>SaaS, gaming,</strong> and <strong>desktop &amp; mobile</strong> —
-      from the complexity of scale to the chaos of zero.
+      from the chaos of zero to the complexity of scale.
     </p>
 
     <p class="bio-secondary">

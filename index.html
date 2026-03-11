@@ -6,7 +6,7 @@
   <title>Hari Krishna</title>
   <meta name="description" content="Technology and Product leader. Versatile across SaaS, gaming, and desktop &amp; mobile software. Bangalore, India.">
   <meta property="og:title" content="Hari Krishna">
-  <meta property="og:description" content="Technology and Product leader. SaaS, gaming, desktop &amp; mobile. 0→1 and 1→10.">
+  <meta property="og:description" content="Technology and Product leader. SaaS, gaming, desktop &amp; mobile. 0&#x2192;1 and 1&#x2192;10.">
   <meta property="og:url" content="https://hari-krishna.com/">
   <meta name="robots" content="index,follow">
   <link rel="icon" type="image/png" href="favicon.png">
@@ -48,7 +48,7 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      overflow: hidden;
+      overflow-x: hidden;
       transition: background 0.4s ease, color 0.4s ease;
     }
 
@@ -137,14 +137,13 @@
       cursor: default;
       opacity: 0;
       animation: fadeUp 0.6s ease 0.45s forwards;
-      transition: color 0.4s ease;
       /* Amber underline draw on hover */
       background-image: linear-gradient(var(--accent), var(--accent));
       background-repeat: no-repeat;
       background-size: 0% 4px;
       background-position: 0 100%;
       /* Animate background-size only after entrance animation completes */
-      transition: background-size 0.3s ease;
+      transition: color 0.4s ease, background-size 0.3s ease;
     }
     .name:hover { background-size: 100% 4px; }
 
@@ -297,13 +296,13 @@
     </p>
 
     <p class="bio-secondary">
-      I've taken products from <strong>0→1</strong> and scaled them through <strong>1→10</strong>
+      I've taken products from <strong>0&#x2192;1</strong> and scaled them through <strong>1&#x2192;10</strong>
       — navigating the distinct challenges each stage demands,
       in startups and growth-stage companies alike.
     </p>
 
     <nav class="links" aria-label="Contact links">
-      <a class="link" href="https://www.linkedin.com/in/harirkrishna/" target="_blank" rel="noopener">
+      <a class="link" href="https://www.linkedin.com/in/harirkrishna/" target="_blank" rel="noopener noreferrer">
         <span class="link-icon" aria-hidden="true"></span>
         LinkedIn
       </a>
